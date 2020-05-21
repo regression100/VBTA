@@ -25,18 +25,18 @@ public class MainController {
     public String home(Model model) throws SQLException, ClassNotFoundException {
         User user=new User();
         ArrayList<User> users=new ArrayList<>();
-        Class.forName("org.postgresql.Driver");
-        connection= DriverManager.getConnection(url,userDB,pass);
-        statement=connection.createStatement();
-        statement2=connection.createStatement();
-        resultSet=statement.executeQuery("select username,firstname,lastname from users where id="+1+"");
-        if (resultSet.next()){
-            user.setFirstName(resultSet.getString(2));
-            users.add(user);
-        }
-
-        System.out.println(user.getFirstName());
-        model.addAttribute("user",user);
+//        Class.forName("org.postgresql.Driver");
+//        connection= DriverManager.getConnection(url,userDB,pass);
+//        statement=connection.createStatement();
+//        statement2=connection.createStatement();
+//        resultSet=statement.executeQuery("select username,firstname,lastname from users where id="+1+"");
+//        if (resultSet.next()){
+//            user.setFirstName(resultSet.getString(2));
+//            users.add(user);
+//        }
+//
+//        System.out.println(user.getFirstName());
+//        model.addAttribute("user",user);
         return "home_page";
     }
 
