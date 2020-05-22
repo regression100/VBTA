@@ -1,10 +1,9 @@
 package databasewithtymleaf.database.controllers;
 
-import databasewithtymleaf.database.user.User;
+import databasewithtymleaf.database.users.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,8 +22,8 @@ public class MainController {
 
     @GetMapping("/home")
     public String home(Model model) throws SQLException, ClassNotFoundException {
-        User user=new User();
-        ArrayList<User> users=new ArrayList<>();
+        Account account=new Account();
+        ArrayList<Account> accounts=new ArrayList<>();
 //        Class.forName("org.postgresql.Driver");
 //        connection= DriverManager.getConnection(url,userDB,pass);
 //        statement=connection.createStatement();

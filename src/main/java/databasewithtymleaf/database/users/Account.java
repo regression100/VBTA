@@ -1,4 +1,4 @@
-package databasewithtymleaf.database.user;
+package databasewithtymleaf.database.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Account {
     private int id;
     private String password;
     private String userName;
@@ -18,7 +18,6 @@ public class User {
     private String phone;
     private String birthDate;
     private String address;
-    private String city;
-    private int pin;
+    private String pin;
     private double balance;
 }

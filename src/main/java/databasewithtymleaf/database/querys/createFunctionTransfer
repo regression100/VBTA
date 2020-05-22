@@ -1,0 +1,4 @@
+CREATE FUNCTION transfer(id1 integer, id2 integer, amount float) RETURNS void AS $$
+                update accounts set balance = balance-amount where accounts.id=id1;
+                update accounts set balance = balance+amount where accounts.id=id2;
+                $$ LANGUAGE sql;

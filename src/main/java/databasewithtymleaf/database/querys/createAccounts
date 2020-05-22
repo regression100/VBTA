@@ -1,0 +1,14 @@
+create table accounts(
+                id serial primary key not null ,
+                username varchar,
+                firstname varchar,
+                lastname varchar,
+                email varchar,
+                gender varchar,
+                phone varchar,
+                address varchar,
+                birthdate date,
+                pin int,
+                password varchar,
+                balance float
+            )

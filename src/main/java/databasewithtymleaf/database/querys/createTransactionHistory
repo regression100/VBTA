@@ -1,0 +1,7 @@
+create table transaction_history(
+                id serial primary key not null ,
+                send_account_id integer references accounts(id),
+                receive_account_id integer references accounts(id),
+                amount float,
+                date date
+            )
