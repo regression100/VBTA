@@ -11,23 +11,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body style="background-color: rgba(0,255,0,0.46)">
+<body style="background-color: rgba(0,255,0,0.46)" onload="document.form.password.focus()">
 <main>
     <div class="col-12 d-flex h-100 justify-content-center container align-content-center mt-2">
-        <div style="background-color: #d1e2ed; border-radius: 20px" class="pb-2 shadow row w-75 border-danger mb-5 d-flex justify-content-center">
+        <form name="form" action="/register"  style="background-color: #d1e2ed; border-radius: 20px" class="pb-2 shadow row w-75 border-danger mb-5 d-flex justify-content-center">
             <h3 class="col-12 text-center" style="font-weight: bold">Virtual bank tizimi</h3>
+            <h6 class="col-12 text-center" style="color: red" th:text="${xatoRegister}"></h6>
             <div class="col-lg-6 col-md-12 w-100 border d-flex mt-2  justify-content-center" >
 
 
 
                 <div style="height: 100%; " class="mb-5 divlar border w-100 pl-5 pr-5 row d-flex justify-content-center  border-dark">
 
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="text" placeholder="Ism">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="text" placeholder="Familiya">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="password" placeholder="Yangi parol">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="password" placeholder="Yangi parolni tasdiqlash">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="email" placeholder="Email">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="number" placeholder="Telefon raqam">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="username" id="username" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="text" placeholder="Username">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="firstname" id="firstname" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="text" placeholder="Ism">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="lastname" id="lastname" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="text" placeholder="Familiya">
+                    <input title="Parol belgilari soni 8 tadan koʻp boʻlishi kerak" required="required" pattern=".{8,}" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="password" id="password" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="password" placeholder="Yangi parol">
+                    <input title="Parol belgilari soni 8 tadan koʻp boʻlishi kerak" pattern=".{8,}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="confrimPassword" id="confrimPassword" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="password" placeholder="Yangi parolni tasdiqlash">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="email" id="email" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="email" placeholder="Email">
+
 
                 </div>
 
@@ -37,24 +39,25 @@
             <div class="col-lg-6 col-md-12 w-100 border d-flex mt-2  justify-content-center">
                 <div style="height: 100%;" class="mb-5 divlar border w-100 pl-5 pr-5 row d-flex justify-content-center  border-dark">
 
-                    <input class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  text-center" type="date" placeholder="Ism">
+                    <input name="birthdate" id="birthdate" class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  text-center" type="date" placeholder="sana">
                     <div style="background-color: white" class="rad border-light col-10 w-75  m-3 shadow-sm input-group justify-content-center  text-center">
                         <span class="mr-5">Jinsingiz:</span>
                         <input class="ml-2" type="radio" name="gender" value="ayol"> Erkak
                         <input class="ml-2" type="radio" name="gender" value="erkak"> Ayol
                     </div>
-                    <input class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="text" placeholder="Viloyat">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="text" placeholder="Shahar/tuman">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="number" placeholder="Yangi pin">
-                    <input class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="number" placeholder="Yangi pinni tasdiqlash">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="phone" id="phone" class="col-10 w-75  m-3 shadow-sm input-group row justify-content-center  " type="number" placeholder="Telefon raqam">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="address" id="address" class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="text" placeholder="Manzil">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="pin" id="pin" class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="number" placeholder="Yangi pin">
+                    <input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" name="confrimPin" id="confrimPin" class="col-10 w-75  m-3 shadow-sm input-group justify-content-center  " type="number" placeholder="Yangi pinni tasdiqlash">
 
                 </div>
 
             </div>
-            <button class="col-3 mt-2 btn-submit" type="submit"><span>Ro'yhatdan o'tish</span></button>
-            <p class="text-center col-12 mb-4 mt-2">Ro'yhatdan o'tganmisiz? <a href="/" class="text-center">Kirish</a></p>
+            <button onclick="Validate" class="col-3 mt-2 btn-submit" type="submit"><span>Ro'yhatdan o'tish</span></button>
+            <p class="text-center col-12 mb-4 mt-2">Ro'yhatdan o'tganmisiz? <a href="/login" class="text-center">Kirish</a></p>
 
-        </div>
+        </form>
+        <script th:inline="javascript" th:src="@{/js/js.js}" src="../static/js/js.js"></script>
     </div>
 </main>
 

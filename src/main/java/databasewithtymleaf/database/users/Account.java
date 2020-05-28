@@ -20,4 +20,24 @@ public class Account {
     private String address;
     private String pin;
     private double balance;
+
+    public Account(int id, String password, String userName, String firstName, String lastName, String email, String phone, String birthDate, String address, String pin) {
+        this.id = id;
+        this.password = password;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.pin=pin;
+    }
+
+
+
+    public Account(String password, String userName) {
+        this.password = password;
+        this.userName = userName;
+    }
 }

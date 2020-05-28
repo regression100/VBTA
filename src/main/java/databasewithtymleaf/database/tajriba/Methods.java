@@ -4,6 +4,9 @@ import databasewithtymleaf.database.users.Account;
 import databasewithtymleaf.database.users.Admin;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Methods implements MethodInterface {
     String temp="";
@@ -15,6 +18,12 @@ public class Methods implements MethodInterface {
     ResultSet resultSet2=null;
     private String url="jdbc:postgresql://localhost:5432/VBT";
     private String userDB="postgres", pass="mahmudxon";
+
+    Date date=new Date();
+    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String dateTime = simpleDateFormat.format(date);
+
+
 
     @Override
     public boolean find_account(String username, String email) throws ClassNotFoundException, SQLException {
@@ -46,8 +55,43 @@ public class Methods implements MethodInterface {
     }
 
     @Override
-    public boolean update_account(Account account) {
-        return false;
+    public String update_account(Account account) throws ClassNotFoundException, SQLException {
+//        Account account=new Account();
+        String natija="";
+        String temp="";
+        Class.forName("org.postgresql.Driver");
+        connection= DriverManager.getConnection(url,userDB,pass);
+        statement=connection.createStatement();
+        statement2=connection.createStatement();
+        resultSet=statement.executeQuery("select username,email,lastname,firstname,phone,address,birthdate from accounts where accounts.id='"+account.getId()+"'");
+        if (resultSet.next()){
+            if (find_account(account.getUserName(),null)&& !resultSet.getString(1).equals(account.getUserName())){
+                natija="Username oldindan mavjud!";
+                System.out.println(natija);
+                return natija;
+            }
+            else {
+                if (find_account(null,account.getEmail())&& !resultSet.getString(2).equals(account.getEmail())){
+                    natija="Email oldindan mavjud!";
+                    System.out.println(natija);
+                    return natija;
+                }
+                else {
+                    System.out.println("Metoddagi pin : "+account.getPin());
+                    temp="'"+account.getUserName()+"','"+account.getFirstName()+"','"+account.getLastName()+"','"+account.getEmail()+"','"+account.getPhone()+"','"+account.getAddress()+"','"+account.getBirthDate()+"',"+account.getPin()+","+account.getId()+"";
+                    statement2.execute("select update_account_information("+temp+")");
+                    natija="Maʻlumotlar saqlandi!";
+                    System.out.println(natija);
+                    return natija;
+                }
+            }
+
+        }
+        else {
+            natija="Nomaʻlum xatolik!";
+            return natija;
+        }
+
     }
 
     @Override
@@ -61,10 +105,17 @@ public class Methods implements MethodInterface {
             return false;
         }
         else {
-            temp="'"+account.getUserName()+"','"+account.getFirstName()+"','"+account.getLastName()+"','"+account.getEmail()+"','"+account.getPassword()+"',"+account.getPin()+","+account.getBalance();
-            statement.execute("insert into accounts(username,firstname,lastname,email,password,pin,balance) values ("+temp+")");
-            System.out.println(account);
-            return true;
+            if (account.getPassword()==null||account.getUserName()==null||account.getEmail()==null||account.getFirstName()==null||account.getLastName()==null||account.getPin()==null){
+                System.out.println("Hamma maʻlumotlarni toʻldiring!");
+                return false;
+            }
+            else {
+                temp="'"+account.getUserName()+"','"+account.getFirstName()+"','"+account.getLastName()+"','"+account.getEmail()+"','"+account.getPassword()+"','"+account.getPin()+"',"+1000+",'"+account.getAddress()+"','"+account.getPhone()+"','"+account.getBirthDate()+"'";
+                statement.execute("insert into accounts(username,firstname,lastname,email,password,pin,balance,address,phone,birthdate) values ("+temp+")");
+                System.out.println(account);
+                return true;
+            }
+
         }
 
 
@@ -77,7 +128,7 @@ public class Methods implements MethodInterface {
         Class.forName("org.postgresql.Driver");
         connection= DriverManager.getConnection(url,userDB,pass);
         statement=connection.createStatement();
-        resultSet=statement.executeQuery("select id,username,firstname,lastname,email,password,pin,balance from accounts where accounts.username='"+username+"' and accounts.password='"+password+"'");
+        resultSet=statement.executeQuery("select id,username,firstname,lastname,email,password,pin,balance,address,phone,birthdate from accounts where accounts.username='"+username+"' and accounts.password='"+password+"'");
         if (resultSet.next()){
             account.setId(resultSet.getInt(1));
             account.setUserName(resultSet.getString(2));
@@ -87,6 +138,9 @@ public class Methods implements MethodInterface {
             account.setPassword(resultSet.getString(6));
             account.setPin(resultSet.getString(7));
             account.setBalance(resultSet.getDouble(8));
+            account.setAddress(resultSet.getString(9));
+            account.setPhone(resultSet.getString(10));
+            account.setBirthDate(resultSet.getString(11));
             return account;
         }
         else {
@@ -125,6 +179,7 @@ public class Methods implements MethodInterface {
         while (resultSet.next()){
             if (resultSet.getString(1).equals(pin)){
                 statement2.execute("select deposit("+id+","+summa+","+pin+")");
+                statement2.execute("select deposit_history_insert("+id+","+summa+",'"+dateTime+"')");
                 return "Balans to'ldirildi!";
             }
             else {
@@ -135,19 +190,20 @@ public class Methods implements MethodInterface {
     }
 
     @Override
-    public String transfer_balance_in_account(int id1, int id2, String pin, double amount) throws ClassNotFoundException, SQLException {
+    public String transfer_balance_in_account(int id1, int id2, double amount) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         connection= DriverManager.getConnection(url,userDB,pass);
         statement=connection.createStatement();
         statement2=connection.createStatement();
-        resultSet=statement.executeQuery("select pin from accounts where accounts.id="+id1+"");
+        resultSet=statement.executeQuery("select id from accounts where accounts.id="+id2+"");
         while (resultSet.next()){
-            if (resultSet.getString(1).equals(pin)){
+            if (resultSet.getInt(1)==(id2)){
                 statement2.execute("select transfer("+id1+","+id2+","+amount+")");
+                statement2.execute("select transaction_history_insert("+id1+","+id2+","+amount+",'"+ dateTime+"')");
                 return "Mablagʻ yuborildi!";
             }
             else {
-                return "Pin notog'ri kiritilgan!";
+                return null;
             }
         }
         return null;

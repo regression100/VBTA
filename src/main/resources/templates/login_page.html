@@ -11,27 +11,44 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body style="background-color: rgba(0,255,0,0.37)">
+<body id="login_page" style="background-color: rgba(0,255,0,0.37)">
 
 <main>
         <div class="col-12 d-flex h-100  justify-content-center container align-content-center mt-5">
             <div class="row mb-5 d-flex justify-content-center">
                 <div class="col-6 d-flex  mb-5 justify-content-center" >
-                    <div style="height: 100%; background-color: #d1e2ed" class="mb-5 w-75 shadow mt-5 row d-flex justify-content-center  border-dark">
-                        <div class="mr-5 ml-5 mt-3">
-                            <h3>Virtual bank tizimiga</h3>
-                            <h3 class="text-center">kirish</h3>
-                        </div>
-                        <input class="col-10 w-75 position-relative  m-3 shadow-sm input-group row justify-content-center" type="email" placeholder="email">
-                        <input class="col-10 w-75  shadow-sm m-3 input-group row justify-content-center " type="password" placeholder="password">
-                        <button th:onclick="${a}" class="col-5 btn-submit mt-3 shadow" style="background-color: #2ff960; height: 12%" type="submit">
-                            <span>Kirish</span>
-                        </button>
-                        <div class="col-12 text-center">
-                            <p class="mt-2">Yangimisiz?</p>
-                            <a href="register">Ro'yhatdan o'tish</a>
-                        </div>
-                    </div>
+<!--                    <div style="height: 100%; background-color: #d1e2ed" class="mb-5 w-75 shadow mt-5 row d-flex justify-content-center  border-dark">-->
+
+<!--                    <div id="xatologin">-->
+<!--                        <script>-->
+<!--                            // var xato=[[${xato}]];-->
+<!--                            // console.log(xato);-->
+<!--                            // console.log(document.getElementById("xatologin").getAttributeNames());-->
+<!--                            // if (document.getElementById("username")===""&&document.getElementById("password")===""){-->
+<!--                            //     document.getElementById("login_button").disabled="disabled";-->
+<!--                            // }-->
+<!--                        </script>-->
+<!--                        Login yoki parol notoʻgʻri!-->
+<!--                    </div>-->
+                        <form style="height: 100%; background-color: #d1e2ed" class="mb-5 w-75 shadow mt-5 row d-flex justify-content-center  border-dark" action="/login">
+                            <div class="mr-5 ml-5 mt-3">
+                                <h3>Virtual bank tizimiga</h3>
+                                <h3 class="text-center">kirish</h3>
+                                <h6 style="color: red" class="text-center" th:text="${xato}"></h6>
+                            </div>
+                            <label for="username"></label><input name="username" id="username" class="col-10 w-75 position-relative  m-3 shadow-sm input-group row justify-content-center" type="text" placeholder="username">
+                            <label for="password"></label><input name="password" id="password" class="col-10 w-75  shadow-sm m-3 input-group row justify-content-center " type="password" placeholder="password">
+                            <button id="login_button" onclick="aa()" class="col-5 btn-submit mt-3 shadow" style="background-color: #2ff960; height: 12%" type="submit">
+                                <span>Kirish</span>
+                            </button>
+                            <div class="col-12 text-center">
+                                <p class="mt-2">Yangimisiz?</p>
+                                <a href="register">Ro'yhatdan o'tish</a>
+                            </div>
+                        </form>
+
+
+<!--                    </div>-->
 
 
                 </div>
@@ -42,7 +59,10 @@
 
 
 </main>
-
+<!--<script th:inline="javascript">-->
+<!--    -->
+<!--</script>-->
+<script th:inline="javascript" th:src="@{/js/js.js}" src="../static/js/js.js"></script>
 
 </body>
 </html>

@@ -1,53 +1,254 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" href="../../static/css/style.css">
 <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
 <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css"
       rel="stylesheet">
+<link href="../../static/css/style.css" media="all" rel="stylesheet"
+      th:href="@{../../css/style.css}" type="text/css"/>
+
 <html lang="en">
 <head>
-    <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css"
-          rel="stylesheet">
+
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body id="user_page" style="background-color: rgba(0,255,0,0.37)">
+<input type="hidden" id="passtd" th:value="${account.password}"/>
+<input type="hidden" id="pintd" th:value="${account.pin}"/>
 <header>
 
 </header>
 
-<main>
-    <div class="mainContainer row">
+<main class="container-fluid d-flex justify-content-center">
+    <div class="container row" >
 
-        <div class="col-3 border">
+        <div class="col-3 border" style="background-color: #d1e2ed">
             <div class="row">
-                <div class="col-12 border">Photo</div>
-                <div class="col-12 border">Settings</div>
-                <div class="col-12 border">Account settings</div>
+                <div class="col-12 border">
+                    <h1>Photo</h1>
+                </div>
             </div>
         </div>
 
 
 
-        <div class="col-9 border w-100">
-            <div class="row">Xush kelibsiz Mahmud Salomov</div>
-            <div class="card-header w-100">
-                <ol style="list-style-type: none">
-                   <li style="float: left">bir</li>
-                   <li style="float: left">ikki</li>
-                   <li style="float: left">uch</li>
-                </ol>
-            </div>
-            <div class="card-body w-100"></div>
+        <div class="col-9 border w-100" style="background-color: #d1e2ed">
+            <div class="row">Xush kelibsiz <p class="pl-1" th:text="${a}+${account.getFirstName()}+${a}+${account.getLastName()}"></p></div>
         </div>
+        <div class="w-100 text-center">
+            <!-- Tab links -->
+            <div class="tab d-flex justify-content-center">
+                <button class="tablinks border" onclick="openCity(event, 'userDetails')">Foydalanuvchi haqida</button>
+                <button class="tablinks border" onclick="openCity(event, 'transactionHistory')">Oʻtkazmalar tarixi</button>
+                <button class="tablinks border" onclick="openCity(event, 'transactions')">Oʻtkazmalar</button>
+                <button class="tablinks border" onclick="openCity(event, 'deposit')">Deposit</button>
+                <button class="tablinks border" onclick="openCity(event, 'changeUserInformations')">Maʻlumotlarni oʻzgartirish</button>
+                <button class="tablinks border" onclick="openCity(event, 'changePassword')">Parolni oʻzgartirish</button>
+                <button class="tablinks border" onclick="openCity(event, 'changePin')">Pinni oʻzgartirish</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="userDetails" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Foydalanuvchi haqida</h3>
+
+                <div class="row">
+
+                    <div class="col-12 ">
+                        <ul class="text-left" style="list-style: none">
+                            <li class="row"><p class="col-3 border-right">ID:</p><p th:text="${account.id}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">username:</p><p th:text="${account.userName}"  class="col-8 bg-white mr-1"></p></li>
+                            <li class="row"><p class="col-3 border-right">firstname:</p><p th:text="${account.firstName}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">lastname:</p><p th:text="${account.lastName}"  class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">email:</p><p th:text="${account.email}"  class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">phone:</p><p th:text="${account.phone}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">address:</p><p th:text="${account.address}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">birthdate:</p><p th:text="${account.birthDate}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+                            <li class="row"><p class="col-3 border-right">balance:</p><p th:text="${account.balance}" class="col-8 bg-white mr-1">aaaaaaa</p></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="transactionHistory" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Oʻtkazmalar tarixi</h3>
+                <p>Paris is the capital of France.</p>
+            </div>
+
+
+
+            <div id="transactions" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Oʻtkazmalar</h3>
+
+                <div class="row d-flex justify-content-center text-center">
+                    <form action="/user"  class="row d-flex justify-content-center">
+                    <div class="col-4">
+                        <ul class="row text-left" style="list-style: none">
+                            <li class="col-12 m-2">aaaaaaaaaa</li>
+                            <li class="col-12 m-2">aaaaaaaaaa</li>
+                            <li class="col-12 m-2">aaaaaaaaaa</li>
+                            <li class="col-12 m-2">aaaaaaaaaa</li>
+                        </ul>
+                    </div>
+                    <div class="col-8">
+                        <div class="row  pr-5">
+                            <label for="id_this"></label><input name="id_this" type="hidden" id="id_this" th:value="${account.id}"/>
+                            <label for="trans_summa"></label><input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 m-2" type="number" name="trans_summa" id="trans_summa" placeholder="Pul miqdori">
+                            <label for="id_send"></label><input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 m-2" type="number" name="id_send" id="id_send" placeholder="Oʻtkaziladigan akkaunt id si">
+<!--                            <label for="trans_password"></label><input required="required" oninput="ValidateTransaction(this)" oninvalid="ValidateTransaction(this)" class="col-12 m-2" name="trans_password" type="password" id="trans_password" placeholder="parol">-->
+                            <label for="trans_pin"></label><input required="required" oninput="ValidatePin(this)" oninvalid="ValidatePin(this)" class="col-12 m-2" type="number" name="trans_pin" id="trans_pin" placeholder="pin">
+                        </div>
+
+                    </div>
+                        <button class="col-2 mt-4 mb-4 btn-block">
+                            Oʻtkazish
+                        </button>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div id="deposit" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Deposit</h3>
+
+                <div class="col-12 d-flex justify-content-center text-center">
+                    <form action="/user" class="row  d-flex justify-content-center">
+                        <div class="col-4">
+                            <ul class="row text-left" style="list-style: none">
+                                <li class="col-12 m-2">aaaaaaaaaa</li>
+                                <li class="col-12 m-2">aaaaaaaaaa</li>
+                                <li class="col-12 m-2">aaaaaaaaaa</li>
+                            </ul>
+                        </div>
+                        <div class="col-8">
+                            <div class="row p-2">
+                                <label for="deposit_summa"></label><input required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 m-2" type="number" name="deposit_summa" id="deposit_summa" placeholder="Pul miqdori">
+<!--                                <label for="deposit_password"></label><input required="required" oninput="ValidateTransaction(this)" oninvalid="ValidateTransaction(this)" name="deposit_password" id="deposit_password" class="col-12 m-2" type="password" placeholder="parol">-->
+                                <label for="deposit_pin"></label><input required="required" oninput="ValidatePin(this)" oninvalid="ValidatePin(this)" name="deposit_pin" id="deposit_pin" class="col-12 m-2" type="number" placeholder="pin">
+
+                                <button class="col-4 mt-4 mb-4 btn-block">
+                                    Oʻtkazish
+                                </button>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+            </div>
+
+            <div id="changeUserInformations" class="tabcontent" style="background-color: #d1e2ed;">
+                <h3>Shaxsiy maʻlumotlarni oʻzgartirish</h3>
+
+                <div class="row d-flex justify-content-center text-center">
+                    <form action="/user_update"  class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <ul class="row text-left" style="list-style: none">
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                            </ul>
+                        </div>
+                        <div class="col-8">
+                            <div class="row  pr-5">
+<!--                                <label for="id_this"></label><input name="id_this" type="hidden" id="id_this" th:value="${account.id}"/>-->
+                                <label for="username_ch"></label><input th:value="${account.userName}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="text" name="username_ch" id="username_ch" placeholder="username">
+                                <label for="firstname_ch"></label><input th:value="${account.firstName}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="text" name="firstname_ch" id="firstname_ch" placeholder="firstname">
+                                <label for="lastname_ch"></label><input th:value="${account.lastName}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="text" name="lastname_ch" id="lastname_ch" placeholder="lastname">
+                                <label for="email_ch"></label><input th:value="${account.email}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="email" name="email_ch" id="email_ch" placeholder="email">
+                                <label for="phone_ch"></label><input th:value="${account.phone}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="number" name="phone_ch" id="phone_ch" placeholder="phone">
+                                <label for="address_ch"></label><input th:value="${account.address}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="text" name="address_ch" id="address_ch" placeholder="address">
+                                <label for="birthdate_ch"></label><input th:value="${account.birthDate}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="date" name="birthdate_ch" id="birthdate_ch" placeholder="birthdate">
+                                <label for="pin_ch"></label><input th:value="${account.pin}" required="required" oninput="InvalidMsg(this)" oninvalid="InvalidMsg(this)" class="col-12 mt-1" type="number" name="pin_ch" id="pin_ch" placeholder="pin">
+                                <label for="password_ch"></label><input required="required" oninput="ValidatePassword(this)" oninvalid="ValidatePassword(this)" class="col-12 mt-1" name="password_ch" type="password" id="password_ch" placeholder="parol">
+                            </div>
+
+                        </div>
+                        <button id="button_change" class="col-2 mt-4 mb-4 btn-block">
+                            Oʻzgartirish
+                        </button>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+            <div id="changePassword" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Parolni oʻzgartirish</h3>
+                <div class="row d-flex justify-content-center text-center">
+                    <form action="/user"  class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <ul class="row text-left" style="list-style: none">
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                                <li class="col-12 ">aaaaaaaaaa</li>
+                            </ul>
+                        </div>
+                        <div class="col-8">
+                            <div class="row  pr-5">
+                                <!--                                <label for="id_this"></label><input name="id_this" type="hidden" id="id_this" th:value="${account.id}"/>-->
+                                <label for="password_change"></label><input required="required" oninput="ValidatePassword(this)" oninvalid="ValidatePassword(this)" class="col-12 mt-1" name="password_change" type="password" id="password_change" placeholder="parol">
+                                <label for="new_password"></label><input required="required" oninput="ValidatePin(this)" oninvalid="ValidatePin(this)" class="col-12 mt-1" type="text" name="new_password" id="new_password" placeholder="Yangi parol">
+                                <label for="confrim_new_password"></label><input required="required" oninput="ValidatePin(this)" oninvalid="ValidatePin(this)" class="col-12 mt-1" type="text" name="confrim_new_password" id="confrim_new_password" placeholder="Yangi parolni tasdiqlash">
+                            </div>
+
+                        </div>
+                        <button id="button_change_password" class="col-2 mt-4 mb-4 btn-block">
+                            Oʻzgartirish
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div id="changePin" class="tabcontent" style="background-color: #d1e2ed">
+                <h3>Pinni oʻzgartirish</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+        </div>
+        <div class="card-body w-100"></div>
 
     </div>
 </main>
+
 
 
 <footer>
 
 </footer>
 
+<script th:inline="javascript" th:src="@{../../js/js.js}" src="../../static/js/js.js">
+
+</script>
+<script th:inline="javascript" th:src="@{../../js/pagination.min.js}" src="../../static/js/pagination.min.js">
+
+</script>
+<!--<script>-->
+<!--    // var jsonBom = document.getElementById("jsonBom").value;-->
+<!--    // console.log(jsonBom);-->
+<!--</script>-->
+<!--<script th:inline="js">-->
+<!--    console.log(9)-->
+<!--</script>-->
 
 </body>
+<!--<script th:src="@{webjars/jquery/3.0.0/jquery.min.js}" src="webjars/jquery/3.0.0/jquery.min.js"></script>-->
+<!--<script th:src="@{webjars/popper.js/1.14.1/popper.min.js}" src="webjars/popper.js/1.14.1/popper.min.js"></script>-->
+<!--<script th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}" src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 </html>

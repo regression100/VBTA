@@ -2,3 +2,13 @@ CREATE FUNCTION transfer(id1 integer, id2 integer, amount float) RETURNS void AS
                 update accounts set balance = balance-amount where accounts.id=id1;
                 update accounts set balance = balance+amount where accounts.id=id2;
                 $$ LANGUAGE sql;
+
+
+
+
+
+
+
+create or replace function update_account_information(usernamech varchar, firstnamech varchar, lastnamech varchar, emailch varchar, phonech varchar, addressch varchar,birthdatech date, idch integer) returns void AS $$
+update accounts set username=usernamech, firstname=firstnamech, lastname=lastnamech, email=emailch,phone=phonech, address=addressch, birthdate=birthdatech where accounts.id=idch;
+$$ LANGUAGE sql;

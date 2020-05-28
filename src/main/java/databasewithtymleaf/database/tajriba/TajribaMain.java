@@ -4,6 +4,9 @@ import databasewithtymleaf.database.users.Account;
 import databasewithtymleaf.database.users.Admin;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class TajribaMain {
@@ -11,6 +14,22 @@ public class TajribaMain {
         Scanner scannerInt=new Scanner(System.in);
         Scanner scannerString=new Scanner(System.in);
         Methods methods=new Methods();
+
+//        java.util.Date dt = new java.util.Date();
+//
+//        java.text.SimpleDateFormat sdf =
+//                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+        Date date=new Date();
+        SimpleDateFormat  simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateTime = simpleDateFormat.format(date);
+        System.out.println(dateTime);
+
+
+//        java.sql.Timestamp date1=new java.sql.Timestamp(date.getTime());
+//        System.out.println(dateTime);
+
+//        System.out.println(Calendar.SHORT);
 
         while (true){
             String username="";
@@ -55,7 +74,7 @@ public class TajribaMain {
                                     idTemp=scannerInt.nextInt();
                                     System.out.println("Pinni kiriting:");
                                     pin=scannerString.nextLine();
-                                    System.out.println(methods.transfer_balance_in_account(account.getId(),idTemp,pin,money));
+                                    System.out.println(methods.transfer_balance_in_account(account.getId(),idTemp,money));
                                     break;
 
                                 default:
@@ -155,6 +174,7 @@ public class TajribaMain {
 
 
                 case 3:
+
                     break;
 
                 default:
