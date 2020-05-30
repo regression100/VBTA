@@ -51,6 +51,8 @@ public class TajribaMain {
                     if (account!=null){
                         System.out.println(account);
 
+
+
                         boolean bool=true;
                         while (bool){
                             double money=0;

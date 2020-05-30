@@ -2,6 +2,13 @@
 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 
+// function update_account() {
+//     var natija=document.getElementById("natija").value;
+//     if (natija!==""){
+//         alert(natija);
+//     }
+// }
+
 function aa() {
     var a=document.getElementById("username").value;
     var b=document.getElementById("username").value;
@@ -35,6 +42,8 @@ function ValidatePassword() {
     // var summa = document.getElementById("trans_summa").value;
     var password_ch = document.getElementById("password_ch").value;
     var password_change = document.getElementById("password_change").value;
+    var new_password = document.getElementById("new_password").value;
+    var confrim_new_password = document.getElementById("confrim_new_password").value;
     // var pin = document.getElementById("trans_pin").value;
     if (password_ch!==""||password_ch!==null){
         if (password_ch !== passtd) {
@@ -63,6 +72,18 @@ function ValidatePassword() {
             document.getElementById("password_change").style.color="green";
             document.getElementById("password_change").setCustomValidity("")
         }
+    }
+    if (new_password !== confrim_new_password) {
+        // alert("Passwords do not match.");
+        document.getElementById("confrim_new_password").style.borderColor="red";
+        document.getElementById("confrim_new_password").style.color="red";
+        document.getElementById("confrim_new_password").setCustomValidity("Parol notogri")
+        // return false;
+    }
+    else {
+        document.getElementById("confrim_new_password").style.borderColor="green";
+        document.getElementById("confrim_new_password").style.color="green";
+        document.getElementById("confrim_new_password").setCustomValidity("")
     }
 
     // return true;
@@ -214,7 +235,7 @@ function validatePassword(inputText) {
 }
 
 
-function openCity(evt, cityName) {
+function tab(evt, name) {
     // console.log(document.getElementById("user_page").getAttribute(' + ${account.getUserName()} +'));
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -232,6 +253,6 @@ function openCity(evt, cityName) {
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(name).style.display = "block";
     evt.currentTarget.className += " active";
 }

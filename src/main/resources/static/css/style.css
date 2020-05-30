@@ -4,6 +4,11 @@ body{
 
 }
 
+
+.kirish_sozi{
+    size: 40px;
+}
+
 input[type=radio]{
     width: 20px;
     height: 20px;
@@ -11,7 +16,7 @@ input[type=radio]{
 
 .btn-submit:hover{
     /*opacity: 0.9;*/
-    transition: 150ms;
+    transition: 500ms;
     /*transform: scale(1.01);*/
 }
 .btn-submit{

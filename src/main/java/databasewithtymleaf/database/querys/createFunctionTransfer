@@ -12,3 +12,15 @@ CREATE FUNCTION transfer(id1 integer, id2 integer, amount float) RETURNS void AS
 create or replace function update_account_information(usernamech varchar, firstnamech varchar, lastnamech varchar, emailch varchar, phonech varchar, addressch varchar,birthdatech date, idch integer) returns void AS $$
 update accounts set username=usernamech, firstname=firstnamech, lastname=lastnamech, email=emailch,phone=phonech, address=addressch, birthdate=birthdatech where accounts.id=idch;
 $$ LANGUAGE sql;
+
+
+create function change_password(id_change integer, newPassword varchar) returns void AS $$
+update accounts set password=newPassword where accounts.id=id_change;
+$$ LANGUAGE sql
+
+
+CREATE FUNCTION transfer(id1 integer, id2 integer, amount float, vaqt varchar) RETURNS void AS $$
+update accounts set balance = balance-amount where accounts.id=id1;
+update accounts set balance = balance+amount where accounts.id=id2;
+insert into transaction_history (send_account_id, receive_account_id, amount, vaqt) values (id1, id2, amount,vaqt);
+$$ LANGUAGE sql;

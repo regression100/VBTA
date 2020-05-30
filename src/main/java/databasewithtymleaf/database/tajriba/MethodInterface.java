@@ -9,6 +9,7 @@ public interface MethodInterface {
     boolean find_account(String username, String email) throws ClassNotFoundException, SQLException;
     boolean find_admin(String email, String password) throws ClassNotFoundException, SQLException;
     String update_account(Account account) throws ClassNotFoundException, SQLException;
+    String change_password(int id, String newPassword) throws ClassNotFoundException, SQLException;
     boolean add_account(Account account) throws SQLException, ClassNotFoundException;
     Account login_account(String username, String password) throws ClassNotFoundException, SQLException;
     Admin login_admin(String username,String password) throws ClassNotFoundException, SQLException;

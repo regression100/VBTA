@@ -95,6 +95,23 @@ public class Methods implements MethodInterface {
     }
 
     @Override
+    public String change_password(int id, String newPassword) throws ClassNotFoundException, SQLException {
+        Class.forName("org.postgresql.Driver");
+        connection= DriverManager.getConnection(url,userDB,pass);
+        statement=connection.createStatement();
+        statement2=connection.createStatement();
+        resultSet=statement.executeQuery("select id from accounts where accounts.id="+id+"");
+        if (resultSet.next()){
+            statement2.execute("select change_password("+id+",'"+newPassword+"')");
+            return "Parol yangilandi";
+        }
+        else {
+            return "Nomaʻlum xatolik!";
+        }
+
+    }
+
+    @Override
     public boolean add_account(Account account) throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         connection= DriverManager.getConnection(url,userDB,pass);
@@ -178,8 +195,8 @@ public class Methods implements MethodInterface {
         resultSet=statement.executeQuery("select pin from accounts where accounts.id="+id+"");
         while (resultSet.next()){
             if (resultSet.getString(1).equals(pin)){
-                statement2.execute("select deposit("+id+","+summa+","+pin+")");
-                statement2.execute("select deposit_history_insert("+id+","+summa+",'"+dateTime+"')");
+                statement2.execute("select deposit("+id+","+summa+",'"+dateTime+"')");
+//                statement2.execute("select deposit_history_insert("+id+","+summa+",'"+dateTime+"')");
                 return "Balans to'ldirildi!";
             }
             else {
@@ -198,8 +215,8 @@ public class Methods implements MethodInterface {
         resultSet=statement.executeQuery("select id from accounts where accounts.id="+id2+"");
         while (resultSet.next()){
             if (resultSet.getInt(1)==(id2)){
-                statement2.execute("select transfer("+id1+","+id2+","+amount+")");
-                statement2.execute("select transaction_history_insert("+id1+","+id2+","+amount+",'"+ dateTime+"')");
+                statement2.execute("select transfer("+id1+","+id2+","+amount+",'"+dateTime+"')");
+//                statement2.execute("select transaction_history_insert("+id1+","+id2+","+amount+",'"+ dateTime+"')");
                 return "Mablagʻ yuborildi!";
             }
             else {

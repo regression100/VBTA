@@ -2,6 +2,7 @@ package databasewithtymleaf.database.controllers;
 
 import databasewithtymleaf.database.tajriba.Methods;
 import databasewithtymleaf.database.users.Account;
+import databasewithtymleaf.database.users.Admin;
 import databasewithtymleaf.database.users.UserRegestrationFields;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 @Controller
 public class MainController {
@@ -17,10 +19,13 @@ public class MainController {
     Statement statement=null;
     Statement statement2=null;
     ResultSet resultSet=null;
+    String natija="aaaaaaaa";
     private String url="jdbc:postgresql://localhost:5432/TestBot";
     private String userDB="postgres", pass="mahmudxon";
     Methods methods=new Methods();
     Account account=null;
+    ArrayList<Account> accounts=new ArrayList<>();
+    Admin admin=null;
     UserRegestrationFields user=null;
     String xato="";
     String xato_register="";
@@ -47,6 +52,8 @@ public class MainController {
 
     @GetMapping("/")
     public String first(){
+        account=null;
+        admin=null;
         return "home_page";
     }
 
@@ -58,6 +65,18 @@ public class MainController {
     @GetMapping("/succes")
     public String succes(){
         return "succes_page";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+
+        if (admin!=null) {
+            return "admin/admin_page";
+        }
+        else {
+            return "redirect:/login";
+        }
+
     }
 
 
@@ -73,10 +92,24 @@ public class MainController {
 //
 //    }
 
+    @GetMapping("/user_password_change")
+    @PostMapping("/user_password_change")
+    public String user(Model model,@RequestParam(value="password_change", required=false, defaultValue= "") String password_change,@RequestParam(value="new_password", required=false, defaultValue= "") String new_password) throws SQLException, ClassNotFoundException {
+        String natija_change_password="";
+        if (account!=null){
+            natija_change_password=methods.change_password(account.getId(),new_password);
+            model.addAttribute("natija_change_password",natija_change_password);
+            account=methods.login_account(account.getUserName(),new_password);
+            return "redirect:/user";
+        }
+
+        return "redirect:/user";
+    }
+
     @GetMapping("/user_update")
     @PostMapping("/user_update")
     public String user(Model model,@RequestParam(value="username_ch", required=false, defaultValue= "") String username_ch,@RequestParam(value="firstname_ch", required=false, defaultValue= "") String firstname_ch,@RequestParam(value="lastname_ch", required=false, defaultValue= "") String lastname_ch,@RequestParam(value="email_ch", required=false, defaultValue= "") String email_ch,@RequestParam(value="phone_ch", required=false, defaultValue= "") String phone_ch,@RequestParam(value="address_ch", required=false, defaultValue= "") String address_ch,@RequestParam(value="birthdate_ch", required=false, defaultValue= "") String birthdate_ch,@RequestParam(value="pin_ch", required=false, defaultValue= "") String pin_ch,@RequestParam(value="password_ch", required=false, defaultValue= "") String password_ch) throws SQLException, ClassNotFoundException {
-        String natija="";
+//        natija="";
         System.out.println("pin : "+pin_ch);
         if (account!=null){
 //            System.out.println("men");
@@ -84,7 +117,7 @@ public class MainController {
             System.out.println("account1 = "+account1);
             if (account1.getPassword().equals(account.getPassword())){
                 natija=methods.update_account(account1);
-                account=methods.login_account(account.getUserName(),account.getPassword());
+                account=methods.login_account(username_ch,account.getPassword());
                 model.addAttribute("natija",natija);
             }
             else {
@@ -96,6 +129,19 @@ public class MainController {
         }
         return "redirect:/user";
     }
+
+//    @GetMapping("/user/")
+//    public String user(@RequestParam("id") int employeeId, Model model)
+//    {
+//        employeeId=account.getId();
+//       return  "redirect:/user";
+//    }
+//
+//    @GetMapping("/user/{id}")
+//    public String user(@PathVariable("id") int employeeId)
+//    {
+//        return  "redirect:/user/{id}";
+//    }
 
     @GetMapping("/user")
     @PostMapping("/user")
@@ -110,6 +156,7 @@ public class MainController {
             System.out.println(id_this);
             System.out.println(id_send);
             System.out.println(trans_summa);
+//            model.addAttribute("natija", natija);
             if (!id_send.equals("0")){
                 String xabar=methods.transfer_balance_in_account(Integer.parseInt(id_this),Integer.parseInt(id_send), Double.parseDouble(trans_summa));
                 System.out.println(xabar);
@@ -143,8 +190,8 @@ public class MainController {
     @PostMapping("/login")
     public String login(@RequestParam(value="username", required=false, defaultValue="") String username, @RequestParam(value="password", required=false, defaultValue="") String password, Model model, Model model2) throws SQLException, ClassNotFoundException {
         String a="aaaaaa";
-
         account=null;
+        admin=null;
 //        account(username,password);
         model2.addAttribute("a", "xato");
         model.addAttribute("account",account);
@@ -168,9 +215,16 @@ public class MainController {
                 return "redirect:/user";
             }
             else {
-                xato="Login yoki parol xato!";
+                admin=methods.login_admin(username,password);
+                if (admin!=null){
+                    return "redirect:/admin";
+                }
+                else {
+                    xato="Login yoki parol xato!";
 //                model2.addAttribute("xato", xato);
-                return "redirect:/login";
+                    return "redirect:/login";
+                }
+
             }
 //            else {
 //                return "redirect:/";

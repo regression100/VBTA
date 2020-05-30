@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style.css">
 <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="all"
+      href="../static/css/style.css" th:href="@{/css/style.css}" />
 <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css"
       rel="stylesheet">
 <html lang="en">
@@ -9,19 +12,44 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<header th:insert="blocks/header::header">
+<body style="background-color: rgba(0,255,0,0.46)">
+<header class="container text-center">
+    <div class="row d-flex justify-content-center">
+        <div class="mt-2 shadow border col-4 pt-4" align="center" style="background-color: #d1e2ed; height: 150px; border-radius: 100%; ">
+            <h1 style="font-size: 50px">VBT</h1>
+            <h6>(Virtual bank tizimi)</h6>
+        </div>
+    </div>
+<!--    th:insert="blocks/header::header"-->
+
 
 </header>
-<main class="h-100">
+<main class="d-flex justify-content-center mt-5 text-center">
+
+<div class="row container d-flex justify-content-center mt-2">
+    <form action="/login" class=" col mt-5 text-center d-flex justify-content-center">
+        <button id="hk" onclick="aa()" class="h-100 w-25 btn-submit mt-3 shadow text-center d-flex justify-content-center" style="background-color: wheat; height: 12%" type="submit">
+            <span>Kirish</span>
+        </button>
+    </form>
+    <!--        <button class="h-75 w-75 btn-lg" href="/login">Kirish</button>-->
+    <!--        <a href="/login"  class="h-50 w-75 btn-block">Kirish</a>-->
+    <form action="/register" class="col-12 text-center mt-2 d-flex justify-content-center">
+
+        <button  id="hr" onclick="aa()" class="h-100 w-25 btn-submit mt-3 shadow text-center d-flex justify-content-center" style="background-color: wheat; height: 12%" type="submit">
+            <span>Ro'yhatdan o'tish</span>
+        </button>
+    </form>
 
 
-    <div class="border col-2 pt-4 d-flex justify-content-center">
-        <a href="/login"  class="h-50 w-75 btn-block">Kirish</a>
-    </div>
-    <div class="border col-2 pt-4 d-flex justify-content-center">
-        <a href="/register" th:href="register" class="h-50 w-75 btn-block">Ro'yhatdan o'tish</a>
-    </div>
+</div>
+
+
+
+
+<!--        <button class="h-75 w-75 btn-lg" href="/register">Ro'yhatdan o'tish</button>-->
+<!--        <a href="/register" th:href="register" class="h-50 w-75 btn-block">Ro'yhatdan o'tish</a>-->
+
 <!--    <div th:each="el: ${user}"  class="col-12 text-center border mt-5">-->
 <!--        <h1 th:text="${user.getFirstName()}"></h1>-->
 <!--        <h1>Yana nimadir</h1>-->
@@ -29,6 +57,9 @@
 
 
 </main>
-<footer th:insert="blocks/footer.html"></footer>
+<footer class="pt-5 text-center">
+    <h5 class="text-center mt-5">Yaratuvchi : Mahmud Salomov</h5>
+<!--    th:insert="blocks/footer.html"-->
+</footer>
 </body>
 </html>
