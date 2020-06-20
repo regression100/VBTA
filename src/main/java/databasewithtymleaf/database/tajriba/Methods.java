@@ -1,30 +1,14 @@
 package databasewithtymleaf.database.tajriba;
 
-import databasewithtymleaf.database.users.Account;
-import databasewithtymleaf.database.users.Admin;
+import databasewithtymleaf.database.model.Account;
+import databasewithtymleaf.database.model.Admin;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Methods implements MethodInterface {
-    String temp="";
-    Connection connection=null;
-    Statement statement=null;
-    Statement statement2=null;
-    Statement statement3=null;
-    ResultSet resultSet=null;
-    ResultSet resultSet2=null;
-    private String url="jdbc:postgresql://localhost:5432/VBT";
-    private String userDB="postgres", pass="mahmudxon";
-
-    Date date=new Date();
-    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    String dateTime = simpleDateFormat.format(date);
-
-
-
+    String temp=""; Connection connection=null; Statement statement=null; Statement statement2=null; Statement statement3=null; ResultSet resultSet=null; ResultSet resultSet2=null; private String url="jdbc:postgresql://localhost:5432/VBT"; private String userDB="postgres", pass="mahmudxon"; Date date=new Date(); SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); String dateTime = simpleDateFormat.format(date);
     @Override
     public boolean find_account(String username, String email) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -39,7 +23,6 @@ public class Methods implements MethodInterface {
         }
 
     }
-
     @Override
     public boolean find_admin(String username, String password) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -53,7 +36,6 @@ public class Methods implements MethodInterface {
             return false;
         }
     }
-
     @Override
     public String update_account(Account account) throws ClassNotFoundException, SQLException {
 //        Account account=new Account();
@@ -93,7 +75,6 @@ public class Methods implements MethodInterface {
         }
 
     }
-
     @Override
     public String change_password(int id, String newPassword) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -110,7 +91,6 @@ public class Methods implements MethodInterface {
         }
 
     }
-
     @Override
     public boolean add_account(Account account) throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
@@ -137,7 +117,6 @@ public class Methods implements MethodInterface {
 
 
     }
-
     @Override
     public Account login_account(String username, String password) throws ClassNotFoundException, SQLException {
         Account account=new Account();
@@ -165,7 +144,6 @@ public class Methods implements MethodInterface {
         }
 
     }
-
     @Override
     public Admin login_admin(String username, String password) throws ClassNotFoundException, SQLException {
         if (find_admin(username,password)){
@@ -185,7 +163,6 @@ public class Methods implements MethodInterface {
             return null;
         }
     }
-
     @Override
     public String add_balance_in_account(double summa, String pin, int id) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -205,7 +182,6 @@ public class Methods implements MethodInterface {
         }
         return null;
     }
-
     @Override
     public String transfer_balance_in_account(int id1, int id2, double amount) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -225,7 +201,6 @@ public class Methods implements MethodInterface {
         }
         return null;
     }
-
     @Override
     public String add_balance_in_admin(double summa, int id) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
@@ -241,7 +216,6 @@ public class Methods implements MethodInterface {
             return "Bunday id li account mavjud emas!";
         }
     }
-
     @Override
     public String tranfer_balance_in_admin(int id1, int id2, double summa) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");

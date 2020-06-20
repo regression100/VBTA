@@ -1,4 +1,4 @@
-package databasewithtymleaf.database.users;
+package databasewithtymleaf.database.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

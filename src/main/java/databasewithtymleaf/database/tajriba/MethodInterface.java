@@ -1,7 +1,7 @@
 package databasewithtymleaf.database.tajriba;
 
-import databasewithtymleaf.database.users.Account;
-import databasewithtymleaf.database.users.Admin;
+import databasewithtymleaf.database.model.Account;
+import databasewithtymleaf.database.model.Admin;
 
 import java.sql.SQLException;
 

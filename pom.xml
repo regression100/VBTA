@@ -14,6 +14,7 @@
     <name>database</name>
     <description>Demo project for Spring Boot</description>
 
+
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -94,7 +95,25 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>databasewithtymleaf.database.VBTApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
         </plugins>
+
+
+
     </build>
 
 </project>

@@ -132,7 +132,8 @@ function InvalidMsg(textbox) {
     if (textbox.value === '') {
         // alert("aaaaaaaaaa");
         textbox.setCustomValidity('Toʻldirish shart!');
-    } else{
+    }
+    else{
         if (textbox.id==="confrimPassword"){
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confrimPassword").value;
