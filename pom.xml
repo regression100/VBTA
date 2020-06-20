@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>DatabaseWithTymleaf</groupId>
-    <artifactId>database</artifactId>
+    <artifactId>VBT</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>database</name>
+    <name>VBT</name>
     <description>Demo project for Spring Boot</description>
 
 

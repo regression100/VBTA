@@ -107,8 +107,8 @@ public class Methods implements MethodInterface {
                 return false;
             }
             else {
-                temp="'"+account.getUserName()+"','"+account.getFirstName()+"','"+account.getLastName()+"','"+account.getEmail()+"','"+account.getPassword()+"','"+account.getPin()+"',"+1000+",'"+account.getAddress()+"','"+account.getPhone()+"','"+account.getBirthDate()+"'";
-                statement.execute("insert into accounts(username,firstname,lastname,email,password,pin,balance,address,phone,birthdate) values ("+temp+")");
+                temp="'"+account.getUserName()+"','"+account.getFirstName()+"','"+account.getLastName()+"','"+account.getEmail()+"','"+account.getPassword()+"','"+account.getPin()+"',"+1000+",'"+account.getAddress()+"','"+account.getPhone()+"','"+account.getBirthDate()+"','"+"Erkak"+"'";
+                statement.execute("insert into accounts(username,firstname,lastname,email,password,pin,balance,address,phone,birthdate,gender) values ("+temp+")");
                 System.out.println(account);
                 return true;
             }
